@@ -1,7 +1,7 @@
 # Fictitious-Play
 **Game Theory and Its Applications**
 
-## Link
+## Info
 https://hackmd.io/Mp1x05shSXa0o2c1VUdlkg#6-References
 
 ## Result
