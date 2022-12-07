@@ -9,7 +9,7 @@ static int MAXRD = 10000;
 static double THRESHOLD = 1e-3;
 static bool INDETAIL = false;
 
-static string action[M] = {"S", "B"};
+static string action[N][M];
 static double matrice[N][M][M];         // Player p's payoff when he doing action a_1 and others doing action a_2
 static double belief[N][M];          // record[Player p][Action a] = times that player p choose action a
 static double payoff[N][M];
@@ -36,8 +36,10 @@ int main(int argc, char** argv) {
     memset(payoff, 0, sizeof(payoff));
 
     /* Actions' name */
-    for (int i = 0; i < M; i++) {
-        cin >> action[i];
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < M; j++) {
+            cin >> action[i][j];
+        }
     }
 
     /* Set belief */
@@ -59,11 +61,11 @@ int main(int argc, char** argv) {
     /* Print game matrice */
     cout << "Game matrix:\n";
     cout << "P1\\P2"
-        << setw(WIDTH) << "c1"
-        << setw(WIDTH) << "c2"
+        << setw(WIDTH) << action[1][0]
+        << setw(WIDTH) << action[1][1]
         << '\n';
     for (int i = 0; i < M; i++) {
-        cout << setw(5) << left << (i == 0 ? "r1" : "r2");
+        cout << setw(5) << left << action[0][i];
         for (int j = 0; j < M; j++) {
             char u[WIDTH];
             sprintf(u, "%.1f,%.1f", matrice[0][i][j], matrice[1][j][i]);
@@ -128,8 +130,8 @@ int main(int argc, char** argv) {
             sprintf(payoff2, "%.2f %.2f", payoff[1][0], payoff[1][1]);
 
             cout << right << setw(5) << round
-                << right << setw(WIDTH) << (round == 0 ? "-" : action[BR[0]])
-                << right << setw(WIDTH) << (round == 0 ? "-" : action[BR[1]])
+                << right << setw(WIDTH) << (round == 0 ? "-" : action[0][BR[0]])
+                << right << setw(WIDTH) << (round == 0 ? "-" : action[1][BR[1]])
                 << right << setw(WIDTH) << string(belief1)
                 << right << setw(WIDTH) << string(belief2)
                 << right << setw(WIDTH) << string(payoff1)
@@ -149,7 +151,7 @@ int main(int argc, char** argv) {
 
             if (pure_strategies.empty()) {
                 cout << "#rounds = " << round << '\n';
-                cout << "Converge, the Nash Equilibrium (pure strategy) is (" << action[BR[0]] << ',' << action[BR[1]] << ")\n";
+                cout << "Converge, the Nash Equilibrium (pure strategy) is [" << action[0][BR[0]] << ',' << action[1][BR[1]] << "]\n";
                 return 0;
             }
 
