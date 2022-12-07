@@ -27,6 +27,7 @@ int main(int argc, char** argv) {
         cerr << "usage: ./ficplay <number of rounds> <threshold> [output in detail]\n";     // example: ./ficplay 1000 0.05 true
         return -1;
     }
+    cout << "Maximum number of rounds: " << MAXRD << '\n' << "Threshold: " << THRESHOLD << '\n';
 
     /* Initial */
     srand(time(NULL));
@@ -56,6 +57,7 @@ int main(int argc, char** argv) {
     }
 
     /* Print game matrice */
+    cout << "Game matrix:\n";
     cout << "P1\\P2"
         << setw(WIDTH) << "c1"
         << setw(WIDTH) << "c2"

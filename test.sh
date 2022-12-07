@@ -10,7 +10,11 @@ echo Questions
 for i in `seq 1 9`
 do
     echo Q$i.
-    ./ficplay < data/$i.txt
+    if [ $# -eq 2 ];
+    then
+        ./ficplay $1 $2 < data/$i.txt
+    else
+        ./ficplay < data/$i.txt
+    fi
     echo
 done
-
